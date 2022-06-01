@@ -24,6 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/candidato/introducao', [CandidateController::class, 'index'])->name('candidate.index');
 Route::get('/candidato/cadastrar', [CandidateController::class, 'create'])->name('candidate.create');
 Route::post('/candidato/cadastrar', [CandidateController::class, 'store'])->name('candidate.store');
+Route::get('/candidato/sucesso', [CandidateController::class, 'success'])->name('candidate.success');
 
 Route::post('/city/search', [CityController::class, 'search_city_by_name'])->name('city.search_by_name');
 Route::post('/job/search', [JobPositionController::class, 'search_job_by_name'])->name('job.search_by_name');

@@ -8,6 +8,11 @@
         </div>
         <div class="row">
             <div class="col-12">
+                @include('components.alerts')
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
                 <form action="" id="form_candidate" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div id="candidate_wizard">
@@ -637,8 +642,8 @@
                                         <select id="language_level" class="form-control">
                                             <option selected value="">Selecione...</option>
                                             <option value="1">Básico</option>
-                                            <option value="1">Intermediário</option>
-                                            <option value="1">Avançado</option>
+                                            <option value="2">Intermediário</option>
+                                            <option value="3">Avançado</option>
                                         </select>
                                     </div>
                                     <div class="col-12 col-lg-3 form-group">

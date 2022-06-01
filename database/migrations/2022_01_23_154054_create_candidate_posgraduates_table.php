@@ -13,15 +13,15 @@ class CreateCandidatePostgraduatesTable extends Migration
      */
     public function up()
     {
-        Schema::create('candidate_postgraduates', function (Blueprint $table) {
+        Schema::create('candidate_posgraduates', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidate_id');
             $table->string('uuid')->unique();
             $table->tinyInteger('type')->default(0);
-            $table->tinyInteger('course');
+            $table->string('course', 200);
             $table->string('institution');
-            $table->date('conclusion_year');
-            $table->string('comment', 1000);
+            $table->string('conclusion_year', 4);
+            $table->string('comment', 1000)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

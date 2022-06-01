@@ -18,10 +18,10 @@ class CreateCandidateCoursesTable extends Migration
             $table->unsignedBigInteger('candidate_id');
             $table->string('uuid')->unique();
             $table->tinyInteger('type')->default(0);
-            $table->tinyInteger('course');
+            $table->string('course', 200);
             $table->string('institution');
-            $table->date('conclusion_year');
-            $table->string('comment', 1000);
+            $table->string('conclusion_year', 4);
+            $table->string('comment', 1000)->nullable();
             $table->timestamps();
             $table->softDeletes();
 

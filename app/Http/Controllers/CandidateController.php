@@ -3,8 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Candidate;
+use App\Models\CandidateCourse;
+use App\Models\CandidateCurse;
+use App\Models\CandidateExperience;
+use App\Models\CandidateFormation;
+use App\Models\CandidateInterest;
+use App\Models\CandidateLanguage;
 use App\Models\CandidatePhone;
+use App\Models\CandidatePosgraduate;
 use App\Models\JobPosition;
+use App\Models\Language;
 use App\Models\State;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,7 +50,6 @@ class CandidateController extends Controller
     public function store(Request $request)
     {
         try {
-            /*
             $candidate = new Candidate();
             $candidate->uuid = Str::uuid();
             $candidate->code = $this->generate_protocol('candidates');
@@ -76,33 +83,128 @@ class CandidateController extends Controller
                 }
                 CandidatePhone::insert($phones);
             }
-            */
 
-            if (($request->has('interest') && !empty($request->input('interest')))) {
+            if (!empty($candidate->id) && ($request->has('interest') && !empty($request->input('interest')))) {
                 $interests = array();
                 foreach ($request->input('interest') as $key => $value) {
                     $job_id = JobPosition::where('uuid', $value['job'])->first()->id;
                     array_push($interests, array(
                         'uuid'                  => $key,
-                        'candidate_id'          => 1,
+                        'candidate_id'          => $candidate->id,
                         'job_id'                => $job_id,
                         'salary_expectation'    => $this->convert_real_to_decimal($value['price']),
-                        'salary_type'           => ($value['salary_type'] == 'month') ? 1 : 2,
+                        'salary_type'           => ($value['type'] == 'month') ? 1 : 2,
                         'created_at'            => now(),
                         'updated_at'            => now()
                     ));
                 }
-                CandidatePhone::insert($interests);
+                CandidateInterest::insert($interests);
             }
 
-            dd('aqui');
+            if (!empty($candidate->id) && ($request->has('experience') && !empty($request->input('experience')))) {
+                $experiencies = array();
+                foreach ($request->input('experience') as $key => $value) {
+                    $job_id = JobPosition::where('uuid', $value['job'])->first()->id;
+                    array_push($experiencies, array(
+                        'uuid'              => $key,
+                        'candidate_id'      => $candidate->id,
+                        'job_id'            => $job_id,
+                        'start'             => $value['start'],
+                        'end'               => $value['end'],
+                        'institution'       => $value['institution'],
+                        'activities'        => $value['activities'],
+                        'show_institution'  => ($value['is_public'] == 'yes') ? 1 : 0,
+                        'created_at'        => now(),
+                        'updated_at'        => now()
+                    ));
+                }
+                CandidateExperience::insert($experiencies);
+            }
+
+
+            if (!empty($candidate->id) && ($request->has('formation') && !empty($request->input('formation')))) {
+                $formations = array();
+                foreach ($request->input('formation') as $key => $value) {
+                    array_push($formations, array(
+                        'uuid'              => $key,
+                        'candidate_id'      => $candidate->id,
+                        'course'            => $value['course'],
+                        'type'              => $value['type'],
+                        'institution'       => $value['institution'],
+                        'period'            => $value['period'],
+                        'conclusion_year'   => $value['conclusion'],
+                        'created_at'        => now(),
+                        'updated_at'        => now()
+                    ));
+                }
+                CandidateFormation::insert($formations);
+            }
+
+            if (!empty($candidate->id) && ($request->has('posgraduate') && !empty($request->input('posgraduate')))) {
+                $posgraduates = array();
+                foreach ($request->input('posgraduate') as $key => $value) {
+                    array_push($posgraduates, array(
+                        'uuid'              => $key,
+                        'candidate_id'      => $candidate->id,
+                        'course'            => $value['course'],
+                        'type'              => $value['type'],
+                        'institution'       => $value['institution'],
+                        'conclusion_year'   => $value['conclusion'],
+                        'comment'           => $value['comment'],
+                        'created_at'        => now(),
+                        'updated_at'        => now()
+                    ));
+                }
+                CandidatePosgraduate::insert($posgraduates);
+            }
+
+            if (!empty($candidate->id) && ($request->has('course') && !empty($request->input('course')))) {
+                $courses = array();
+                foreach ($request->input('course') as $key => $value) {
+                    array_push($courses, array(
+                        'uuid'              => $key,
+                        'candidate_id'      => $candidate->id,
+                        'course'            => $value['course'],
+                        'type'              => $value['type'],
+                        'institution'       => $value['institution'],
+                        'conclusion_year'   => $value['conclusion'],
+                        'comment'           => $value['comment'],
+                        'created_at'        => now(),
+                        'updated_at'        => now()
+                    ));
+                }
+                CandidateCourse::insert($courses);
+            }
+
+            if (!empty($candidate->id) &&  ($request->has('language') && !empty($request->input('language')))) {
+                $languages = array();
+                foreach ($request->input('language') as $key => $value) {
+                    $language_id = Language::where('uuid', $value['uuid'])->first()->id;
+                    array_push($languages, array(
+                        'uuid'              => $key,
+                        'candidate_id'      => $candidate->id,
+                        'language_id'       => $language_id,
+                        'level'             => $value['level'],
+                        'created_at'        => now(),
+                        'updated_at'        => now()
+                    ));
+                }
+                CandidateLanguage::insert($languages);
+            }
+            return redirect(route('candidate.success'));
         } catch (Exception $exception) {
             Log::error("Erro ao cadastrar candidato:", [
                 'error' => $exception->getMessage(),
                 'data' => $request->all(),
                 'date' => now()
             ]);
-            abort(500);
+            return redirect()->back()->with('alert-danger', 'Oops!, encontramos um problema ao processar os seus dados, tente mais tarde!');
         }
     }
+
+
+    public function success(){
+        return view('candidate.success');
+    }
+
 }

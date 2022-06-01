@@ -16,12 +16,12 @@ class CreateCandidateFormationsTable extends Migration
         Schema::create('candidate_formations', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('candidate_id');
-            $table->unsignedBigInteger('course_id');
             $table->string('uuid')->unique();
+            $table->string('course', 200);
             $table->tinyInteger('type')->default(0);
             $table->string('institution');
-            $table->tinyInteger('period');
-            $table->date('conclusion_year');
+            $table->tinyInteger('period')->nullable();
+            $table->string('conclusion_year', 4)->nullable();
             $table->timestamps();
             $table->softDeletes();
 
