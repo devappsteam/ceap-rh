@@ -24,7 +24,7 @@ class CandidateController extends Controller
     public function index()
     {
         try {
-            return view('candidate.index');
+            return view('site.candidate.index');
         } catch (Exception $exception) {
             Log::error("Erro ao acessar a tela inicial:", [
                 'error' => $exception->getMessage(),
@@ -37,7 +37,7 @@ class CandidateController extends Controller
     public function create()
     {
         try {
-            return view('candidate.form');
+            return view('site.candidate.form');
         } catch (Exception $exception) {
             Log::error("Erro ao acessar a tela inicial:", [
                 'error' => $exception->getMessage(),
@@ -204,7 +204,7 @@ class CandidateController extends Controller
 
 
     public function success(){
-        return view('candidate.success');
+        return view('site.candidate.success');
     }
 
 }

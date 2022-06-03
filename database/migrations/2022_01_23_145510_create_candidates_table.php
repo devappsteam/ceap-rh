@@ -15,8 +15,8 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('city_id');
-            $table->string('uuid')->unique();
+            $table->unsignedBigInteger('city_id')->nullable();
+            $table->string('uuid',36)->unique();
             $table->string('code', 36)->unique();
             $table->string('name', 240);
             $table->tinyInteger('sex')->default(0);

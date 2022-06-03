@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('site.layout.app')
 @section('content')
     <section class="candidate container py-5">
         <div class="row">

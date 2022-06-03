@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             StatesTableSeeder::class,
             CitiesTableSeeder::class,
             JobsTableSeeder::class,
+            LanguagesTableSeeder::class,
         ]);
     }
 }

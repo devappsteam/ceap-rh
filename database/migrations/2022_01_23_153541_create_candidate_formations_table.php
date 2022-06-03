@@ -26,7 +26,6 @@ class CreateCandidateFormationsTable extends Migration
             $table->softDeletes();
 
             $table->foreign('candidate_id')->references('id')->on('candidates');
-            $table->foreign('course_id')->references('id')->on('courses');
         });
     }
 

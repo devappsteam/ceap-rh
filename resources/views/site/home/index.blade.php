@@ -1,4 +1,4 @@
-@extends('layout.app')
+@extends('site.layout.app')
 @section('content')
     <section class="slider container-fluid">
         <div class="row">
@@ -51,13 +51,13 @@
                     <a class="btn btn-primary btn-lg btn--highlights" href="#">Últimas<br>vagas</a>
                 </div>
                 <div class="col-12 col-md text-center mb-3 mb-md-0">
-                    <a class="btn btn-primary btn-lg btn--highlights" href="#">Últimas<br>vagas</a>
+                    <a class="btn btn-primary btn-lg btn--highlights" href="#">Ver todas<br>as vagas</a>
                 </div>
                 <div class="col-12 col-md text-center mb-3 mb-md-0">
-                    <a class="btn btn-primary btn-lg btn--highlights" href="#">Últimas<br>vagas</a>
+                    <a class="btn btn-primary btn-lg btn--highlights" href="{{ route('candidate.index') }}">Cadastrar<br>Currículo</a>
                 </div>
                 <div class="col-12 col-md text-center mb-3 mb-md-0">
-                    <a class="btn btn-primary btn-lg btn--highlights" href="#">Últimas<br>vagas</a>
+                    <a class="btn btn-primary btn-lg btn--highlights" href="{{ route('school.create') }}">Cadastrar<br>Instituição</a>
                 </div>
             </div>
         </div>
@@ -80,7 +80,7 @@
                     <p>Já possui cadastro no CEAP-RH? Selecione uma das opções abaixo.</p>
                     <div class="row">
                         <div class="col-12 col-md text-center mb-3 mb-md-0">
-                            <a class="btn btn-primary btn-lg btn--highlights w-70" href="{{ route('candidate.index') }}">
+                            <a class="btn btn-primary btn-lg btn--highlights w-70" href="#">
                                 <div class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                                         stroke-linecap="round" stroke-linejoin="round" class="feather feather-user">

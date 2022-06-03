@@ -11,7 +11,7 @@ class HomeController extends Controller
     public function index()
     {
         try {
-            return view('home.index');
+            return view('site.home.index');
         } catch (Exception $exception) {
             Log::error("Erro ao acessar a tela inicial:", [
                 'error' => $exception->getMessage(),

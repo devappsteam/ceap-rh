@@ -6,6 +6,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobPositionController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\SchoolController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,3 +31,7 @@ Route::post('/city/search', [CityController::class, 'search_city_by_name'])->nam
 Route::post('/job/search', [JobPositionController::class, 'search_job_by_name'])->name('job.search_by_name');
 Route::post('/language/search', [LanguageController::class, 'search_language_by_name'])->name('language.search_by_name');
 Route::post('/file/send', [FileController::class, 'send_file'])->name('file.send');
+
+Route::get('/instituicao/cadastrar', [SchoolController::class, 'create'])->name('school.create');
+Route::post('/instituicao/cadastrar', [SchoolController::class, 'store'])->name('school.store');
+Route::get('/instituicao/sucesso', [CandidateController::class, 'success'])->name('school.success');

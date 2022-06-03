@@ -15,10 +15,11 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('city_id');
+            $table->unsignedBigInteger('city_id')->nullable();
             $table->string('uuid', 36)->unique();
+            $table->string('code', 36)->unique();
             $table->string('name', 250);
-            $table->string('cnpj', 20);
+            $table->string('cnpj', 20)->unique();
             $table->string('phone', 16);
             $table->string('email', 250);
             $table->string('director_name', 150);
